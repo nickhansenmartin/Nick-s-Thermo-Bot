@@ -1,5 +1,3 @@
-#Airtable Token: patAZ83Nmip4h0IzH.5f34bd1c4d93fa3a0bcdbe47c6b9ecf5702498d78f308f7872cb81f481f63342
-
 # NOTE: This code should not be run on its own. This just saves the code for use with the OpenCV websiteimport cv2
 import cv2
 import numpy as np
@@ -22,7 +20,7 @@ predominant_color = "Blue" if avg_b > avg_r else "Red"
 textBox.innerText = f"Predominant color: {predominant_color}"
 
 # Replace with your Airtable API key, base ID, table name, and record ID
-API_KEY = 'patAZ83Nmip4h0IzH.5f34bd1c4d93fa3a0bcdbe47c6b9ecf5702498d78f308f7872cb81f481f63342'
+API_KEY = ''
 BASE_ID = 'appo4v9qUBWpJUbl2'
 TABLE_ID = 'tblyvGSPiqA2AINcY'
 RECORD_ID = 'rec7ODEleus0mmgRQ'
