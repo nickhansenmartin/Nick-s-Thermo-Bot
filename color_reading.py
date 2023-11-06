@@ -2,7 +2,7 @@ import urequests as requests
 import ujson
 
 # Replace with your Airtable API key, base ID, table name, and record ID
-API_KEY = 'patAZ83Nmip4h0IzH.5f34bd1c4d93fa3a0bcdbe47c6b9ecf5702498d78f308f7872cb81f481f63342'
+API_KEY = ''
 BASE_ID = 'appo4v9qUBWpJUbl2'
 TABLE_ID = 'tblyvGSPiqA2AINcY'
 RECORD_ID = 'rec7ODEleus0mmgRQ'
