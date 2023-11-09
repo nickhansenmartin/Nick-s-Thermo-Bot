@@ -1,5 +1,4 @@
-# Adafruit Key = aio_ZNdu93nhSPHRWyT7W7kwb4XTDJoY
-# Adafruit ID = nmarti13
+
 
 import network
 from umqtt import MQTTClient
@@ -10,7 +9,7 @@ WIFI_SSID = 'Tufts_Wireless'
 WIFI_PASSWORD = ''
 ADA_IO_URL = 'io.adafruit.com'
 ADA_IO_USERNAME = 'nmarti13'
-ADA_IO_KEY = 'aio_ZNdu93nhSPHRWyT7W7kwb4XTDJoY'
+ADA_IO_KEY = '(placeholder)'
 FEED_KEY = 'temp'
 
 # Connect to WiFi
