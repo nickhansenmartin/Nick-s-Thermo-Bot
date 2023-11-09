@@ -15,6 +15,8 @@ light_test.py: This function turns on a certain amount of lights on the LED ther
 
 internet_test.py: This function simply tests connectivity of the Pi Pico for the purposes of internet communications (i.e., for the Airtable API).
 
+adafruit_test.py: This function allows testing of the MQTT sending of data to the Adafruit dashboard
+
 LIBRARIES:
 None of the following libraries were written by Nicholas Martin. They are easily available online and meant for public use.
 
