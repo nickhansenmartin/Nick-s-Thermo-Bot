@@ -4,10 +4,11 @@ import math
 from pico_i2c_lcd import I2cLcd
 import urequests as requests
 import ujson
+from umqtt import MQTTClient
 
 # AIRTABLE READING #
 # Replace with the Airtable API key, base ID, table name, and record ID
-API_KEY = ''
+API_KEY = 'patAZ83Nmip4h0IzH.5f34bd1c4d93fa3a0bcdbe47c6b9ecf5702498d78f308f7872cb81f481f63342'
 BASE_ID = 'appo4v9qUBWpJUbl2'
 TABLE_ID = 'tblyvGSPiqA2AINcY'
 RECORD_ID = 'rec7ODEleus0mmgRQ'
@@ -62,7 +63,7 @@ async def temp_read():
         # Convert from Kelvin to Celsius
         TempC = TempK - 273.15
 
-        #Prints results every 4 seconds
+        # Prints results every 4 seconds
         if color_val == 'Blue':
             print('Temperature, Kelvin: ' + str(round(TempK, 2)))
         elif color_val == 'Red':
@@ -119,18 +120,46 @@ async def leds():
                 for j in range(i + 1, len(pins)):
                     pins[j].value(False)  # Turn off the correct LEDs
 
+# ADAFRUIT DASHBOARD #
+ADA_IO_URL = 'io.adafruit.com'
+ADA_IO_USERNAME = 'nmarti13'
+ADA_IO_KEY = 'aio_ZNdu93nhSPHRWyT7W7kwb4XTDJoY'
+FEED_KEY1 = 'temp'
+FEED_KEY2 = 'units'
+async def adafruit():
+    global TempC
+    global color_val
+
+    # Create an MQTT client and connect
+    client = MQTTClient(ADA_IO_USERNAME, ADA_IO_URL, user=ADA_IO_USERNAME, password=ADA_IO_KEY, ssl=False)
+    client.connect()
+
+    # Send data to the feed
+    if color_val == 'Blue':
+        TempK = TempC + 273.15
+        tempval = TempK
+        unitval = 'Kelvin'
+    elif color_val == 'Red':
+        tempval = TempC
+        unitval = 'Celsius'
+
+    topic1 = bytes('{}/feeds/{}.csv'.format(ADA_IO_USERNAME, FEED_KEY1), 'utf-8')
+    client.publish(topic1, bytes(str(tempval), 'utf-8'))
+
+    topic2 = bytes('{}/feeds/{}.csv'.format(ADA_IO_USERNAME, FEED_KEY2), 'utf-8')
+    client.publish(topic2, bytes(str(unitval), 'utf-8'))
+
 # MAIN FUNCTION #
 async def main():
     asyncio.create_task(airtable_read())
     asyncio.create_task(temp_read())
     asyncio.create_task(screen())
     asyncio.create_task(leds())
-    await asyncio.sleep(15)
+    asyncio.create_task(adafruit())
+    await asyncio.sleep(120)
 
 asyncio.run(main())
 
 # Turn off all the LEDs at the end of the program
 for pin in pins:
     pin.value(False)
-
-
